@@ -1,4 +1,5 @@
-// i will be an ingeter. Double it and return it.
+// Challenge: i will be an ingeter. Double it and return it.
+
 function doubleInteger(i) {
     i = i * 2;
     return i;
