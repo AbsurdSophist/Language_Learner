@@ -27,16 +27,17 @@ contract Game is IERC721Receiver {
         uint256 tokenId,
         bytes calldata data
     ) external returns (bytes4) {
+        originalOwner[tokenId] = from;
         return IERC721Receiver.onERC721Received.selector;
     }
 
-    function depositNFT(uint256 tokenID) external {
-        originalOwner[tokenID] = msg.sender;
-        itemNFT.safeTransferFrom(msg.sender, address(this), tokenID);
+    function depositNFT(uint256 tokenId) external {
+        originalOwner[tokenId] = msg.sender;
+        itemNFT.safeTransferFrom(msg.sender, address(this), tokenId);
     }
 
-    function withdrawNFT(uint tokenID) external {
-        require(originalOwner[tokenID] == msg.sender, "Not original owner");
-        itemNFT.safeTransferFrom(address(this), msg.sender, tokenID);
+    function withdrawNFT(uint tokenId) external {
+        require(originalOwner[tokenId] == msg.sender, "Not original owner");
+        itemNFT.safeTransferFrom(address(this), msg.sender, tokenId);
     }
 }
